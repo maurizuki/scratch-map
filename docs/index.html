@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>My scratch map</title>
+        <style>html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background-color: #000000; }</style>
+    </head>
+    <body>
+        <script src="src/svg-world-map.js"></script>
+        <script>
+            var map;
+
+            loadMap();
+            async function loadMap() {
+                var map = await svgWorldMap({
+                    bigMap: false,
+                    showLabels: false,
+                    showInfoBox: true,
+                    worldColor: "#000000",
+                });
+
+                const color1 = "#f34f1c";
+                const color2 = "#7fbc00";
+                const color3 = "#ffba01";
+                const color4 = "#01a6f0";
+
+                map.update({
+                    AE: color2,
+                    AT: color1,
+                    CH: color2,
+                    DE: color4,
+                    DK: color1,
+                    ES: color1,
+                    FR: color3,
+                    GB: color4,
+                    HR: color2,
+                    HU: color4,
+                    IE: color2,
+                    IM: color1,
+                    IT: "#747474",
+                    JP: color3,
+                    SI: color3,
+                    US: color4,
+                });
+            }
+        </script>
+    </body>
+</html>

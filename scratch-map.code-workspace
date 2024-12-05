@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "docs"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.live-server"
+		]
+	}
+}

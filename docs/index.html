@@ -1,49 +1,25 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>My scratch map</title>
-        <style>html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background-color: #000000; }</style>
-    </head>
-    <body>
-        <script src="src/svg-world-map.js"></script>
-        <script>
-            loadMap();
-            async function loadMap() {
-                var map = await svgWorldMap({
-                    libPath: "src/",
-                    bigMap: false,
-                    showLabels: false,
-                    showInfoBox: true,
-                    worldColor: "#000000",
-                });
-
-                const sonicSilver = "#747474";
-                const oriolesOrange = "#f34f1c";
-                const appleGreen = "#7fbc00";
-                const selectiveYellow = "#ffba01";
-                const vividCerulean = "#01a6f0";
-
-                map.update({
-                    AE: appleGreen,
-                    AT: oriolesOrange,
-                    CH: appleGreen,
-                    DE: vividCerulean,
-                    DK: oriolesOrange,
-                    ES: oriolesOrange,
-                    FR: selectiveYellow,
-                    GB: vividCerulean,
-                    HR: appleGreen,
-                    HU: vividCerulean,
-                    IE: appleGreen,
-                    IM: oriolesOrange,
-                    IT: sonicSilver,
-                    JP: selectiveYellow,
-                    SI: selectiveYellow,
-                    US: vividCerulean,
-                    TZ: oriolesOrange,
-                });
-            }
-        </script>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>My scratch map</title>
+    <script src="src/svg-world-map.js"></script>
+    <script src="visited-countries.js"></script>
+    <style>html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background-color: #000000; }</style>
+</head>
+<body>
+    <script>
+        loadMap();
+        async function loadMap() {
+            var map = await svgWorldMap({
+                libPath: "src/",
+                bigMap: false,
+                showLabels: false,
+                showInfoBox: true,
+                worldColor: "#000000",
+            });
+            map.update(visitedCountries);
+        }
+    </script>
+</body>
 </html>

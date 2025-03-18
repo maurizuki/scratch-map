@@ -9,4 +9,4 @@ Powered by [SVG World Map JS](https://github.com/raphaellepuschitz/SVG-World-Map
 3. Edit [docs/visited-countries.js](docs/visited-countries.js): set the object `visitedCountries` to the countries that you have visited, for example `visitedCountries = { US: "#ff0000", GB: "#00ff00" }` highlights the U.S.A. and the United Kingdom in red and green, respectively.
 4. Wait until the *pages build and deployment* workflow ends.
 5. If you kept the original repo name, you should find your scratch map at *https://**your_user_name**.github.io/scratch-map/*.
-6. Enjoy! 🫶
+6. Have a good trip! 🧳

@@ -6,6 +6,8 @@
 # My scratch map
 [The countries I've visited on planet Earth.](https://maurizuki.github.io/scratch-map)
 
+![The World](https://github.com/user-attachments/assets/8236fac4-1a83-4097-b44f-818e14370544)
+
 Powered by [SVG World Map JS](https://github.com/raphaellepuschitz/SVG-World-Map) 🗺
 
 ## How to get yours

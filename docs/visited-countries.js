@@ -45,7 +45,7 @@ const visitedCountries = {
     // CC: oriolesOrange,
     // CD: vividCerulean,
     // CF: selectiveYellow,
-    // CG: oriolesOrange,
+    // CG: appleGreen,
     CH: vividCerulean,
     // CI: vividCerulean,
     // CK: oriolesOrange,

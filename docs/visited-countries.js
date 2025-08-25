@@ -92,7 +92,7 @@ const visitedCountries = {
     // GN: selectiveYellow,
     // GP: appleGreen,
     // GQ: selectiveYellow,
-    // GR: selectiveYellow,
+    GR: selectiveYellow,
     // GS: appleGreen,
     // GT: appleGreen,
     // GU: oriolesOrange,
@@ -253,3 +253,4 @@ const visitedCountries = {
     // ZM: appleGreen,
     // ZW: vividCerulean,
 };
+

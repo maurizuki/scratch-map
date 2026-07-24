@@ -141,7 +141,7 @@ const visitedCountries = {
     // LV: vividCerulean,
     // LY: selectiveYellow,
     // MA: vividCerulean,
-    // MC: oriolesOrange,
+    MC: oriolesOrange,
     // MD: oriolesOrange,
     // ME: vividCerulean,
     // MF: oriolesOrange,

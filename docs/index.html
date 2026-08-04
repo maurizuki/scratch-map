@@ -3,13 +3,32 @@
 <head>
     <meta charset="utf-8">
     <title>My scratch map</title>
+    <link rel="stylesheet" href="css/flag-icons.min.css">
     <script src="src/svg-world-map.js"></script>
     <script src="visited-countries.js"></script>
-    <style>html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background-color: #000000; }</style>
+    <style>
+        html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background-color: #000000; }
+        #flags-button { position: fixed; top: 12px; left: 12px; z-index: 1001; padding: 7px 16px; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 14px; color: #444444; background-color: rgba(255, 255, 255, .75); border: 1px solid #CDCDCD; border-radius: 20px; cursor: pointer; }
+        #flags-button:hover { background-color: rgba(255, 255, 255, .95); }
+        #flags-overlay { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1000; overflow-y: auto; padding: 60px 30px 30px; background-color: rgba(0, 0, 0, .8); backdrop-filter: blur(5px); font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; color: #FFFFFF; }
+        #flags-overlay[hidden] { display: none; }
+        #flags-heading { margin: 0 0 20px; font-size: 20px; font-weight: normal; }
+        #flags-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px 24px; margin: 0; padding: 0; }
+        #flags-list li { display: flex; align-items: center; gap: 10px; list-style: none; font-size: 15px; }
+        #flags-list .fi { flex: none; font-size: 1.7em; border: 1px solid rgba(255, 255, 255, .3); box-shadow: 0 0 0 3px var(--map-color); }
+    </style>
 </head>
 <body>
+    <button id="flags-button" type="button" aria-expanded="false" aria-controls="flags-overlay">Flags</button>
+    <div id="flags-overlay" role="dialog" aria-modal="true" aria-label="Visited countries" hidden>
+        <h2 id="flags-heading"></h2>
+        <ul id="flags-list"></ul>
+    </div>
     <script>
         loadMap();
+        buildFlagsList();
+        initFlagsToggle();
+
         async function loadMap() {
             var map = await svgWorldMap({
                 libPath: "src/",
@@ -19,6 +38,70 @@
                 worldColor: "#000000",
             });
             map.update(visitedCountries);
+        }
+
+        // Render one entry per visited country: flag icon plus country name, sorted alphabetically
+        function buildFlagsList() {
+            var regionNames = displayNames();
+            var entries = Object.keys(visitedCountries).map(function(code) {
+                return { code: code, name: countryName(regionNames, code) };
+            });
+            entries.sort(function(a, b) { return a.name.localeCompare(b.name); });
+
+            var fragment = document.createDocumentFragment();
+            entries.forEach(function(entry) {
+                var flag = document.createElement("span");
+                flag.className = "fi fi-" + entry.code.toLowerCase();
+                flag.title = entry.name;
+                // Echo the country's scratch map color around its flag
+                flag.style.setProperty("--map-color", visitedCountries[entry.code]);
+
+                var item = document.createElement("li");
+                item.appendChild(flag);
+                item.appendChild(document.createTextNode(entry.name));
+                fragment.appendChild(item);
+            });
+
+            document.getElementById("flags-heading").textContent = "Visited countries — " + entries.length;
+            document.getElementById("flags-list").appendChild(fragment);
+        }
+
+        function displayNames() {
+            try {
+                return new Intl.DisplayNames(["en"], { type: "region" });
+            } catch (error) {
+                return null;
+            }
+        }
+
+        // Intl.DisplayNames throws on codes that are not valid ISO 3166-1 regions, fall back to the code itself
+        function countryName(regionNames, code) {
+            if (regionNames === null) { return code; }
+            try {
+                return regionNames.of(code) || code;
+            } catch (error) {
+                return code;
+            }
+        }
+
+        function initFlagsToggle() {
+            var button = document.getElementById("flags-button");
+            var overlay = document.getElementById("flags-overlay");
+
+            button.addEventListener("click", function() { toggleFlags(overlay.hidden); });
+            // Clicks on the entries themselves must not close the overlay
+            overlay.addEventListener("click", function(event) {
+                if (event.target === overlay) { toggleFlags(false); }
+            });
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Escape" && !overlay.hidden) { toggleFlags(false); }
+            });
+
+            function toggleFlags(show) {
+                overlay.hidden = !show;
+                button.setAttribute("aria-expanded", String(show));
+                button.textContent = show ? "Close" : "Flags";
+            }
         }
     </script>
 </body>

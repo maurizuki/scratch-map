@@ -8,7 +8,8 @@
 
 ![The World](https://github.com/user-attachments/assets/81ca6bc7-0891-4dde-87b0-f6662b6dbafd)
 
-Powered by [SVG World Map JS](https://github.com/raphaellepuschitz/SVG-World-Map) 🗺
+- World map by [SVG World Map JS](https://github.com/raphaellepuschitz/SVG-World-Map)
+- Country flags by [flag-icons](https://github.com/lipis/flag-icons)
 
 ## How to get yours
 1. [Create a repository from this one](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
